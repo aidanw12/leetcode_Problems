@@ -1,0 +1,84 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        int ans = 0;
+        unsigned int i;
+        for(i = 0; i < s.length() - 1; ++i) {
+            if(s.at(i) == 'M') {
+                ans += 1000;
+            }
+            else if(s.at(i) == 'D') {
+                ans += 500;
+            }
+            else if(s.at(i) == 'C') {
+                if(s.at(i + 1) == 'M') {
+                    ans += 900;
+                    i++;
+                }
+                else if(s.at(i + 1) == 'D') {
+                    ans += 400;
+                    i++;
+                }
+                else {
+                    ans += 100;
+                }
+            }
+            else if(s.at(i) == 'L') {
+                ans += 50;
+            }
+            else if(s.at(i) == 'X') {
+                if(s.at(i + 1) == 'C') {
+                    ans += 90;
+                    i++;
+                }
+                else if(s.at(i + 1) == 'L') {
+                    ans += 40;
+                    i++;
+                }
+                else {
+                    ans += 10;
+                }
+            }
+            else if(s.at(i) == 'V') {
+                ans += 5;
+            }
+            else if(s.at(i) == 'I') {
+                if(s.at(i + 1) == 'X') {
+                    ans += 9;
+                    i++;
+                }
+                else if(s.at(i + 1) == 'V') {
+                    ans += 4;
+                    i++;
+                }
+                else {
+                    ans += 1;
+                }
+            }
+        }
+        if(i == s.length() - 1) {
+            if(s.at(i) == 'M') {
+                ans += 1000;
+            }
+            else if(s.at(i) == 'D') {
+                ans += 500;
+            }
+            else if(s.at(i) == 'C') {
+                ans += 100;
+            }
+            else if(s.at(i) == 'L') {
+                ans += 50;
+            }
+            else if(s.at(i) == 'X') {
+                ans += 10;
+            }
+            else if(s.at(i) == 'V') {
+                ans += 5;
+            }
+            else if(s.at(i) == 'I') {
+                ans += 1;
+            }
+        }
+        return ans;
+    }
+};
