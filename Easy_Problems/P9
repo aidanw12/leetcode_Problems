@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x < 0) {
+            return false;
+        }
+        int reversed = 0;
+        int y = x;
+        while(y != 0) {
+            reversed *= 10;
+            reversed += y % 10;
+            y /= 10;
+            if(y != 0 && reversed > INT32_MAX / 10) {
+                return false;
+            }
+        }
+        return x == reversed;
+    }
+};
