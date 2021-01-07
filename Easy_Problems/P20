@@ -1,0 +1,42 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        if(s.size() == 0) {
+            return true;
+        }
+        else if(s.size() == 1 || s.at(0) == ']' || s.at(0) == '}' || s.at(0) == ')') {
+            return false;
+        }
+        for(int i = 0; i < s.size(); ++i) {
+            if(s.at(i) == '[' || s.ats(i) == '{' || s.at(i) == '(') {
+                parens.push(s.at(i));
+            }
+            else if(s.at(i) == '}' || s.at(i) == ')' || s.at(i) == ']') {
+                if(parens.empty()) {
+                    return false;
+                }
+                if(s.at(i) == ']') {
+                    if(parens.empty() || parens.top() != '[') {
+                        return false;
+                    }
+                    parens.pop();
+                }
+                else if(s.at(i) == ')') {
+                    if(parens.top() != '(') {
+                        return false;
+                    }
+                    parens.pop();
+                }
+                else if(s.at(i) == '}') {
+                    if(parens.top() != '{' || parens.empty()) {
+                        return false;
+                    }
+                    parens.pop();
+                }
+            }
+        }
+        return parens.empty();
+    }
+private:
+    stack<char> parens;  
+};
