@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        if(nums.size() == 0 || nums.size() == 1) {
+            return nums.size();
+        }
+        else if(nums.at(0) == nums.at(nums.size() - 1)) {
+            nums.erase(nums.begin() + 1, nums.begin() + nums.size());
+            return 1;
+        }
+        
+        vector<int>::iterator pStart = nums.begin();
+        for(auto ptr1 : nums) {
+            if(*pStart != ptr1) {
+                pStart++;
+                *pStart = ptr1;
+            }
+        }
+        
+        nums.erase(pStart + 1, nums.begin() + nums.size());
+        return nums.size();
+    }
+};
