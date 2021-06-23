@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if(needle.size() > haystack.size()) {
+            return -1;
+        }
+        
+        int hSize = haystack.size();
+        int nSize = needle.size();
+        for(int i = 0; i < hSize - nSize + 1; i++) {
+            if(haystack.substr(i, nSize) == needle) {
+                return i;
+            }
+        }
+        return -1;
+    }
+};
