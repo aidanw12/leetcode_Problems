@@ -39,16 +39,9 @@ public:
         
         int currentNum = nums.at(0);
         int maxNum = nums.at(0);
-        for(int i = 1; i < nSize; ++i) {
-            if(nums.at(i) > currentNum + nums.at(i)) {
-                currentNum = nums.at(i);
-            }
-            else {
-                currentNum += nums.at(i);
-            }
-            if(currentNum > maxNum) {
-                maxNum = currentNum;
-            }   
+        for(int i = 1; i < nSize; ++i) { 
+            currentNum = max(nums.at(i), currentNum + nums.at(i));
+            maxNum = max(currentNum, maxNum);
         }
         return maxNum;
     }
