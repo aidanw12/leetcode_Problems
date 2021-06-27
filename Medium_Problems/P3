@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int sSize = s.size();
+        if(sSize < 2) {
+            return sSize;
+        }
+        
+        int numAns = 0;
+        int count = 0;
+        unordered_map <char, int> mapVals;
+        unordered_map <char, int>::iterator currentVal;
+        for(int i = 0; i < sSize; ++i) {
+            currentVal = mapVals.find(s.at(i));
+            if(currentVal != mapVals.end()) {
+                if(count > numAns) {
+                    numAns = count;
+                }
+                i = (currentVal -> second);
+                count = 0;
+                mapVals.clear();
+            }
+            else {
+                mapVals[s[i]] = i;
+                count++;
+            }
+        }
+        
+        if(count > numAns) {
+            numAns = count;
+        }
+        return numAns;
+    }
+};
