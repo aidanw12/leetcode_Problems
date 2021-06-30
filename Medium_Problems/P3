@@ -32,3 +32,34 @@ public:
         return numAns;
     }
 };
+
+
+//Much shorter without clear
+class Solution {
+public:
+    int max(int a, int b){
+        if(a > b){
+            return a;
+        }
+        return b;
+    }
+    
+    int lengthOfLongestSubstring(string s) {
+        int ans = 0;
+        unordered_map <char,int> freq;
+        int j = 0;
+        for(int i = 0; i < s.size() ; i++){
+            freq[s[i]]++;
+            if(freq[s[i]] > 1) {
+                ans = max(ans, i - j);
+                while(freq[s[i]] > 1) {
+                    freq[s[j]]--;
+                    j++;
+                }
+            }
+        }
+		
+        ans = max(ans,s.size() - j);
+        return ans;
+    }
+};
