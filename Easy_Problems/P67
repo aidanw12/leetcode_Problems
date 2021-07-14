@@ -1,0 +1,54 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        int aPos = a.length() - 1;
+        int bPos = b.length() - 1;
+        string leftOver = "";
+        int leftPos = 0;
+        bool carry = false;
+        int numTot = 0;
+        string ans = "";
+        
+        while(aPos >= 0 && bPos >= 0) {
+            numTot = static_cast<int>(a.at(aPos)) + static_cast<int>(b.at(bPos)) - 96;
+            if(carry) {
+                numTot++;
+                carry = false;
+            }
+            if(numTot >= 2) {
+                numTot -= 2;
+                carry = true;
+            }
+            ans = static_cast<char>(numTot + 48) + ans;
+            aPos--;
+            bPos--;
+        }
+        
+        if(aPos < 0) {
+            leftPos = bPos;
+            leftOver = b;
+        }
+        else {
+            leftPos = aPos;
+            leftOver = a;
+        }
+        while(leftPos >= 0) {
+            numTot = static_cast<int>(leftOver.at(leftPos)) - 48;
+            if(carry) {
+                numTot++;
+                carry = false;
+            }
+            if(numTot >= 2) {
+                numTot -= 2;
+                carry = true;
+            }
+            ans = static_cast<char>(numTot + 48) + ans;
+            leftPos--;
+        }
+        
+        if(carry) {
+            ans = "1" + ans;
+        }
+        return ans;
+    }
+};
