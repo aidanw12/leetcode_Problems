@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int mySqrt(int x) {
+        int ans = 0;
+        int counter = 1;
+        long long num = 0;
+        while(num <= x) {
+            ans++;
+            num += counter;
+            counter += 2;
+        }
+        
+        return ans - 1;
+    }
+};
