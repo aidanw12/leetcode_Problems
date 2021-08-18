@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(p == nullptr && q == nullptr) {
+            return true;
+        }
+        else if(p == nullptr || q == nullptr) {
+            num++;
+            return false;
+        }
+        
+        isSameTree(p -> left, q -> left);
+        if(p -> val != q -> val) {
+            num++;
+        }
+        isSameTree(p -> right, q -> right);
+        
+        if(num > 0) {
+            return false;
+        }
+        return true;
+        
+    }
+private:
+    int num = 0;
+};
