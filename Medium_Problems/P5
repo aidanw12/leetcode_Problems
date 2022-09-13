@@ -1,0 +1,50 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int longPal = 1;
+        int startPos = 0;
+        
+        for(int i = 0; i < s.length(); ++i)
+        {
+            if(s.length() - i <= longPal)
+            {
+                break;
+            }
+            
+            vector<int> sameLetters;
+            for(int j = i + 1; j < s.length(); ++j)
+            {
+                if(s.at(i) == s.at(j))
+                {
+                    sameLetters.push_back(j);
+                }
+            }
+            
+            bool isPalin = true;
+            for(int k = sameLetters.size() - 1; k >= 0; --k)
+            {
+                for(int l = 0; l < (sameLetters.at(k) - i)/2 + 1; ++l)
+                {
+                    if(s.at(i + l) != s.at(sameLetters.at(k) - l))
+                    {
+                        isPalin = false;
+                        break;
+                    }
+                }
+                if(!isPalin)
+                {
+                    // Nothing
+                }
+                else if(sameLetters.at(k) - i + 1 > longPal)
+                {
+                    longPal = sameLetters.at(k) - i + 1;
+                    startPos = i;
+                    break;
+                }
+                isPalin = true;
+            }
+        }
+        
+        return s.substr(startPos, longPal);
+    }
+};
